@@ -1,0 +1,13 @@
+{
+  "scenario_id": "eval_001",
+  "name": "Hallway Width Compliance Check",
+  "description": "Evaluate if the hallway in the provided floor plan meets the minimum width requirements according to the local building code.",
+  "inputs": {
+    "floor_plan_path": "data/raw/cubicasa_sample_1.json",
+    "user_query": "Does the hallway in this floor plan comply with the minimum width requirements?"
+  },
+  "expected_outcome": {
+    "tool_calls_expected": ["AnalyzeFloorPlanTool", "SearchBuildingCodeTool"],
+    "expected_answer_contains": ["non-compliant", "3.0 feet", "requires 3.5 feet"]
+  }
+}
