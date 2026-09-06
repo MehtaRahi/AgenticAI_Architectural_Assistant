@@ -1,26 +1,26 @@
 # FastAPI Web Server
-fastapi==0.110.0
-uvicorn==0.27.1
-python-multipart==0.0.9
-pydantic==2.6.4
-pydantic-settings==2.2.1
+fastapi
+uvicorn
+python-multipart
+pydantic
+pydantic-settings
 
 # AI & Orchestration
-langchain==0.1.13
-langchain-community==0.0.29
-langgraph==0.0.30
-ollama==0.1.7
+langchain
+langchain-community
+langgraph
+ollama
 
 # Vector Database
-chromadb==0.4.24
+chromadb
 
 # Document Parsing
-PyMuPDF==1.24.0 # For PDF
-python-docx==1.1.0 # For Word documents
+PyMuPDF # For PDF
+python-docx # For Word documents
 
 # Database (PostgreSQL)
-SQLAlchemy==2.0.29
-psycopg2-binary==2.9.9
+SQLAlchemy
+psycopg2-binary
 
 # Tracking
-mlflow==2.11.3
+mlflow
