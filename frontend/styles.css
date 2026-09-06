@@ -1,0 +1,143 @@
+/* ArchAgent AI — Design System v2 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg-primary: #0a0e17;
+  --bg-secondary: #111827;
+  --bg-surface: rgba(15, 23, 42, 0.65);
+  --bg-surface-hover: rgba(30, 41, 59, 0.75);
+  --border-dim: rgba(255, 255, 255, 0.06);
+  --border-glow: rgba(56, 189, 248, 0.25);
+  --cyan: #38bdf8;
+  --indigo: #818cf8;
+  --emerald: #34d399;
+  --amber: #fbbf24;
+  --rose: #fb7185;
+  --text-1: #f1f5f9;
+  --text-2: #94a3b8;
+  --text-3: #64748b;
+  --radius: 12px;
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* ---- Global ---- */
+html, body, [class*="css"] {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+code, pre, .mono { font-family: 'JetBrains Mono', monospace !important; }
+
+/* ---- Hero Banner ---- */
+.hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, rgba(56,189,248,0.08) 100%);
+  border: 1px solid var(--border-glow);
+  border-radius: 16px;
+  padding: 28px 36px;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 40%, rgba(56,189,248,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  background: linear-gradient(135deg, #fff 20%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 0 6px 0;
+}
+.hero p { color: var(--text-2); font-size: 0.95rem; margin: 0; max-width: 720px; line-height: 1.5; }
+
+/* ---- Glass Card ---- */
+.glass {
+  background: var(--bg-surface);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.glass:hover {
+  border-color: var(--border-glow);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 0 12px rgba(56,189,248,0.08);
+}
+
+/* ---- KPI Stat ---- */
+.kpi-label { color: var(--text-3); font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+.kpi-value { font-size: 1.7rem; font-weight: 700; color: var(--text-1); line-height: 1.15; }
+.kpi-hint  { font-size: 0.78rem; color: var(--emerald); margin-top: 3px; }
+
+/* ---- Feature Hub ---- */
+.hub {
+  background: linear-gradient(180deg, rgba(30,41,59,0.45) 0%, rgba(15,23,42,0.55) 100%);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius);
+  padding: 22px;
+  transition: border-color 0.2s, transform 0.2s;
+  height: 100%;
+}
+.hub:hover { border-color: var(--cyan); transform: translateY(-3px); }
+.hub-title { font-size: 1.1rem; font-weight: 700; color: var(--text-1); margin-bottom: 6px; }
+.hub-desc  { font-size: 0.88rem; color: var(--text-2); line-height: 1.5; }
+
+/* ---- Badges ---- */
+.badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; }
+.badge-pass { background: rgba(52,211,153,0.12); color: var(--emerald); border: 1px solid rgba(52,211,153,0.25); }
+.badge-fail { background: rgba(251,113,133,0.12); color: var(--rose); border: 1px solid rgba(251,113,133,0.25); }
+.badge-warn { background: rgba(251,191,36,0.12); color: var(--amber); border: 1px solid rgba(251,191,36,0.25); }
+.badge-info { background: rgba(56,189,248,0.12); color: var(--cyan); border: 1px solid rgba(56,189,248,0.25); }
+
+/* ---- Tool Pill ---- */
+.tool-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(129,140,248,0.12); color: #a5b4fc;
+  border: 1px solid rgba(129,140,248,0.25);
+  padding: 2px 9px; border-radius: 6px;
+  font-size: 0.78rem; font-family: 'JetBrains Mono', monospace;
+  margin: 2px 4px 2px 0;
+}
+
+/* ---- Finding Card ---- */
+.finding {
+  background: rgba(15,23,42,0.75);
+  border-radius: var(--radius);
+  border-left: 4px solid var(--cyan);
+  padding: 16px 20px;
+  margin-bottom: 14px;
+}
+.finding.fail { border-left-color: var(--rose); }
+.finding.warn { border-left-color: var(--amber); }
+.finding.pass { border-left-color: var(--emerald); }
+
+/* ---- Citation Box ---- */
+.cite {
+  background: #0c1120;
+  border: 1px solid var(--border-dim);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  margin-top: 8px;
+}
+
+/* ---- Section Header ---- */
+.section-head {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-1);
+  margin: 28px 0 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ---- Sidebar Tweaks ---- */
+[data-testid="stSidebar"] { border-right: 1px solid var(--border-dim) !important; }
