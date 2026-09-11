@@ -10,8 +10,13 @@ services:
       - ./frontend:/app
     depends_on:
       - backend
+      - mlflow
     environment:
       - BACKEND_URL=http://backend:8000
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+      - AWS_ACCESS_KEY_ID=admin
+      - AWS_SECRET_ACCESS_KEY=password
+      - MLFLOW_S3_ENDPOINT_URL=http://minio:9000
 
   backend:
     build:
@@ -26,9 +31,33 @@ services:
       - DB_PASSWORD=postgres
       - DB_NAME=architecture_db
       - MINIO_ENDPOINT=minio:9000
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+      - AWS_ACCESS_KEY_ID=admin
+      - AWS_SECRET_ACCESS_KEY=password
+      - MLFLOW_S3_ENDPOINT_URL=http://minio:9000
     depends_on:
       - db
       - minio
+      - mlflow
+
+  mlflow:
+    build:
+      context: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      - AWS_ACCESS_KEY_ID=admin
+      - AWS_SECRET_ACCESS_KEY=password
+      - MLFLOW_S3_ENDPOINT_URL=http://minio:9000
+    command: >
+      mlflow server
+      --backend-store-uri postgresql://postgres:postgres@db:5432/architecture_db
+      --default-artifact-root s3://mlflow
+      --host 0.0.0.0
+    depends_on:
+      - db
+      - minio
+      - minio-init
 
   db:
     image: postgres:15
@@ -52,6 +81,18 @@ services:
       - MINIO_ROOT_PASSWORD=password
     volumes:
       - minio_data:/data
+
+  minio-init:
+    image: minio/mc
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc alias set myminio http://minio:9000 admin password;
+      /usr/bin/mc mb myminio/mlflow --ignore-existing;
+      /usr/bin/mc anonymous set public myminio/mlflow;
+      exit 0;
+      "
 
 volumes:
   postgres_data:
