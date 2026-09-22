@@ -9,7 +9,8 @@ pydantic-settings
 langchain
 langchain-community
 langgraph
-ollama
+langchain-ollama
+langchain-groq
 
 # Vector Database
 chromadb

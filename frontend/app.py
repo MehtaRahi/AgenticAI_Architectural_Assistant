@@ -122,5 +122,32 @@ with h4:
 
 
 # Copilot
-st.markdown('<div class="section-head">Architectural Copilot</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-head">Architectural Design & Copilot</div>', unsafe_allow_html=True)
+
+with st.expander("📝 Design Requirements (Configure Before Generating Design)", expanded=True):
+    col_a, col_b, col_c = st.columns(3)
+    
+    with col_a:
+        width = st.number_input("Room Width (ft)", min_value=5, max_value=100, value=12)
+        length = st.number_input("Room Length (ft)", min_value=5, max_value=100, value=12)
+        bed_size = st.selectbox("Bed Size", ["None", "Twin", "Full", "Queen", "King"])
+        
+    with col_b:
+        doors = st.number_input("Number of Doors", min_value=1, max_value=5, value=1)
+        closet = st.checkbox("Include Closet", value=True)
+        washroom = st.checkbox("Attached Washroom", value=False)
+        
+    with col_c:
+        other_furniture = st.text_area("Other Furniture / Notes", placeholder="e.g. Desk, Dresser, Bookshelf")
+
+# Save constraints to session state so chat_ui can access them
+st.session_state.design_constraints = {
+    "dimensions": f"{width}x{length} ft",
+    "bed_size": bed_size,
+    "doors": doors,
+    "closet": closet,
+    "washroom": washroom,
+    "other_furniture": other_furniture
+}
+
 render_chat_interface()
