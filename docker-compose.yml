@@ -3,11 +3,13 @@ version: '3.8'
 services:
   frontend:
     build: 
-      context: ./frontend
+      context: ./frontend-next
     ports:
-      - "8501:8501"
+      - "3000:3000"
     volumes:
-      - ./frontend:/app
+      - ./frontend-next:/app
+      - /app/node_modules
+      - /app/.next
     depends_on:
       - backend
       - mlflow
@@ -36,6 +38,7 @@ services:
       - AWS_SECRET_ACCESS_KEY=password
       - MLFLOW_S3_ENDPOINT_URL=http://minio:9000
       - GROQ_API_KEY=${GROQ_API_KEY}
+      - PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
     depends_on:
       - db
       - minio
